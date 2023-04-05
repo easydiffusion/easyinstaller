@@ -1,0 +1,63 @@
+config_version: 1.0
+
+project_name: Easy Diffusion
+project_version: 2.5
+project_author: cmdr2 and contributors
+project_website: https://stable-diffusion-ui.github.io
+
+platforms:
+  - windows
+  - mac
+  - linux
+
+# use a git URL that's accessible to the user.
+# tip: use an HTTPS url if you don't expect the user to have ssh configured on their computer
+project_repo: https://github.com/cmdr2/stable-diffusion-ui.git
+
+# common config
+copy_files:
+  - from: CreativeML Open RAIL-M License
+    to: CreativeML Open RAIL-M License
+  - from: How to install and run.txt
+    to: How to install and run.txt
+  - from: LICENSE
+    to: LICENSE
+
+download_files:
+  - from: https://huggingface.co/CompVis/stable-diffusion-v-1-4-original/resolve/main/sd-v1-4.ckpt
+    to: models/stable-diffusion/sd-v1-4.ckpt
+  - from: https://github.com/TencentARC/GFPGAN/releases/download/v1.3.0/GFPGANv1.3.pth
+    to: models/gfpgan/GFPGANv1.3.pth
+  - from: https://github.com/xinntao/Real-ESRGAN/releases/download/v0.1.0/RealESRGAN_x4plus.pth
+    to: models/realesrgan/RealESRGAN_x4plus.pth
+  - from: https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.2.4/RealESRGAN_x4plus_anime_6B.pth
+    to: models/realesrgan/RealESRGAN_x4plus_anime_6B.pth
+  - from: https://huggingface.co/stabilityai/sd-vae-ft-mse-original/resolve/main/vae-ft-mse-840000-ema-pruned.ckpt
+    to: models/vae/vae-ft-mse-840000-ema-pruned.ckpt
+  - from: https://huggingface.co/openai/clip-vit-large-patch14/resolve/8d052a0f05efbaefbc9e8786ba291cfdf93e5bff/pytorch_model.bin
+    to: profile/.cache/huggingface/hub/models--openai--clip-vit-large-patch14/snapshots/8d052a0f05efbaefbc9e8786ba291cfdf93e5bff/pytorch_model.bin
+
+# platform-specific config
+windows:
+  start_file: Start Stable Diffusion UI.cmd
+  copy_files:
+    - from: D:\user-pack\installer_files
+      to: installer_files
+    - from: D:\user-pack\profile
+      to: profile
+    - from: D:\user-pack\sd-ui-files
+      to: sd-ui-files
+  default_install_dir: C:\EasyDiffusion
+  icon: NSIS/cyborg_flower_girl.ico
+  welcome_page_image: NSIS/cyborg_flower_girl.bmp
+  license:
+    - LICENSE
+    - CreativeML Open RAIL-M License
+  regkey: Software\Microsoft\Easy Diffusion\App Paths\installer.exe
+
+linux:
+  start_file: start.sh
+
+mac:
+  start_file: start.sh
+
